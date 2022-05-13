@@ -9,7 +9,7 @@ else:
     BASE = f'/home/pdd/{app_name}'
 
 if using[0:7] != 'DEV_WIN':
-    host = 'pdd_1'
+    host = 'receipt'
     os = 'unix'
     debug_level = 2
     FACE_CONTROL_ENABLE = True
@@ -21,8 +21,8 @@ else:
     host = 'localhost'
     port = 80
 
-service_host = 'armconeeo.iiscon.kz'
-service_port = '5001'
+service_host = 'receipt.gov4c.kz'
+service_port = 5001
 LOG_FILE = f'{BASE}/pdd.log'
 debug = True
 language = 'ru'
