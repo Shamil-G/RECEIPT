@@ -51,6 +51,7 @@ def uploaded_file(filename):
 def get_request():
     log.info(f"----> SERVICE START.")
     # if request.method == "POST":
+    status = 0
     try:
         lang = request.args.get('lang')
         appId = request.args.get('appId')
