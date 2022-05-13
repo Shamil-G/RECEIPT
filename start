@@ -1,1 +1,19 @@
+ENV_HOME=/home/cut_pdf/RECEIPT/venv/bin
+python3 -m venv venv
+. $ENV_HOME/activate
+pip install --upgrade pip
+pip install flask
+#pip install flask_login
+#pip install cx_Oracle
+#pip install xlsxwriter
+#pip install openpyxl
+#pip install flask_sqlalchemy
+#pip install uwsgi
+#pip install reportlab
+#pip install flask_cors
+pip install requests
+#pip install psutil
+#pip install redis
+#pip install flask_session
 pip install pdfrw
+python3 main_app.py
