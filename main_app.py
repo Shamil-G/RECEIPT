@@ -55,11 +55,11 @@ def get_request():
     try:
         lang = request.args.get('lang')
         appId = request.args.get('appId')
-        log.info(f"GET VALUES: {appId} : {lang}")
+        log.info(f"+++++ GET: appId: '{appId}', lang: {lang}")
         if appId:
             status = get_pdf(appId, lang)
             if status:
-                log.error(f"GET REQUEST, RECEIPT FOUND. appId: {appId}")
+                log.error(f"GET REQUEST. appId: {appId}, status: {status}")
                 cut_pdf(f"{appId}.pdf", f"{appId}-2.pdf")
             else:
                 log.error(f"ERROR REQUEST: {appId}")
@@ -68,9 +68,9 @@ def get_request():
     finally:
         if status:
             send_from_directory(f"{appId}-2.pdf")
-            return f"<html><h1>Request RECEIPT {appId} FOUND!</h1></html>"
+            return f"<html><h1>Request RECEIPT with appId: {appId} FOUND!</h1></html>"
         else:
-            return f"<html><h1>Request RECEIPT {appId} not FOUND</h1></html>"
+            return f"<html><h1>Request RECEIPT with appId: '{appId}' not FOUND</h1></html>"
 
 
 # https://notes.gov4c.kz/ipsc/receipt.sv?lang=ru&appId=002224748721
