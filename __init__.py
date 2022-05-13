@@ -1,4 +1,4 @@
-from pdd_parameter import using
+from receipt_parameter import using
 from flask import Flask
 from logger import log
 

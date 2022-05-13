@@ -1,4 +1,4 @@
-from pdd_parameter import using, app_name
+from receipt_parameter import using, app_name
 
 
 if using == 'DEV_WIN_HOME':
