@@ -21,7 +21,8 @@ else:
     host = 'localhost'
     port = 80
 
-service_host = 'test.iiscon.kz'
+service_host = 'armconeeo.iiscon.kz'
+service_port = '5001'
 LOG_FILE = f'{BASE}/pdd.log'
 debug = True
 language = 'ru'

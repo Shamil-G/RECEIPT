@@ -9,7 +9,7 @@ writer = pdfrw.PdfWriter()
 
 
 def get_pdf(appId, lang):
-    url = f'http://{cfg.service_host}/ipsc/receipt.sv?lang={lang}&appId={appId}'
+    url = f'http://{cfg.service_host}:{cfg.service_port}/ipsc/receipt.sv?lang={lang}&appId={appId}'
     success = 0
     try:
         log.info(f'-----> SEND REQUEST. <  SEND  >. appId: {appId}, lang: {lang}, url: {url}')
