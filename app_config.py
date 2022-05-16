@@ -24,11 +24,9 @@ else:
 service_host = 'notes1.gov4c.kz'
 service_port = 5001
 LOG_FILE = f'{BASE}/pdd.log'
+SPOOL = f'{BASE}/spool'
 debug = True
-language = 'ru'
-src_lang = 'file'
 trace_malloc = False
-move_at_once = False
 
 print(f"=====> CONFIG. using: {using}, BASE: {BASE}, app_name: {app_name}")
 

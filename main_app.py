@@ -72,11 +72,12 @@ def get_request():
             status, text = get_pdf(appId, lang)
             print(f"-----------> status: {status}, text: {text}")
             if status:
-                cut_pdf(f"{appId}.pdf", f"{appId}-2.pdf")
+                cut_pdf(f"{cfg.SPOOL}/{appId}.pdf", f"{cfg.SPOOL}/{appId}-2.pdf")
+                return send_from_directory(f"{cfg.SPOOL}", f"{appId}-2.pdf")
             else:
                 log.error(f"ERROR REQUEST: {appId}")
     except Exception as e:
-        log.info(f"GET VALUES: {appId} : {lang}")
+        log.error(f"GET VALUES: {appId} : {lang}. error: {e}")
     finally:
         if status:
             send_from_directory(f"{appId}-2.pdf")
