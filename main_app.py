@@ -25,7 +25,7 @@ def get_pdf(appId, lang):
         resp = requests.get(url)
         resp_text = resp.content
         resp.close()
-        save_doc_to_file(f'{appId}.pdf', resp_text)
+        save_doc_to_file(f'{cfg.SPOOL}/{appId}.pdf', resp_text)
         del resp_text
         status = 1
         log.info(f'-----> SEND REQUEST. <  SEND  >. appId: {appId}, lang: {lang}, url: {url}')
