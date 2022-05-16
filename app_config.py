@@ -6,7 +6,7 @@ if using == 'DEV_WIN_HOME':
 elif using == 'DEV_WIN':
     BASE = f'C:/Shamil/{app_name}'
 else:
-    BASE = f'/home/pdd/{app_name}'
+    BASE = f'/home/cut_pdf/{app_name}'
 
 if using[0:7] != 'DEV_WIN':
     host = 'notes1.gov4c.kz'
