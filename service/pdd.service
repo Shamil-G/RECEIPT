@@ -1,0 +1,13 @@
+[Unit]
+Description=WSGI-RECEIPT
+After=network.target
+
+[Service]
+Type=simple
+User=pdd
+WorkingDirectory=/home/cut_pdf/RECEIPT
+ExecStart=/home/cut_pdf/RECEIPT/venv/bin/uwsgi --ini wsgi.ini
+
+[Install]
+WantedBy=multi-user.target
+

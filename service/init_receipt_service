@@ -1,0 +1,5 @@
+#systemctl get-default
+systemctl daemon-reload
+systemctl enable /home/cut_pdf/RECEIPT/service/cut_pdf.service
+systemctl start cut_pdf
+systemctl status -l cut_pdf
