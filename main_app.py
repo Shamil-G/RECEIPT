@@ -64,6 +64,7 @@ def get_request():
         log.error(f"GET VALUES: {appId} : {lang}. error: {e}")
     finally:
         if status:
+            cut_pdf(f"{cfg.SPOOL}/{appId}-2.pdf", f"{cfg.SPOOL}/{appId}-2.pdf")
             return send_from_directory(f"{cfg.SPOOL}", f"{appId}-2.pdf")
         else:
             return f"<html><h1>Запрошенная расписка №'{appId} не найдена'</h1></html>"
