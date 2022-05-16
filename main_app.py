@@ -3,30 +3,42 @@ import app_config as cfg
 from flask import make_response, request, send_from_directory
 import requests
 import pdfrw
+import os
 
 
 writer = pdfrw.PdfWriter()
+
+
+def save_doc_to_file(url, text):
+    print('WE are in save_doc_to_file')
+    if os.path.exists(url):
+        os.remove(url)
+    with open(url, "wb") as file:
+        file.write(text)
+    log.info(f"------>SAVE PDF TO FILE: {url}")
 
 
 def get_pdf(appId, lang):
     url = f'http://{cfg.service_host}:{cfg.service_port}/ipsc/receipt.sv?lang={lang}&appId={appId}'
     success = 0
     try:
-        log.info(f'-----> SEND REQUEST. <  SEND  >. appId: {appId}, lang: {lang}, url: {url}')
-        resp = requests.post(url)
-        resp_json = resp.json()
-        send_status = resp_json["status"]
+        resp = requests.get(url)
+        resp_text = resp.content
         resp.close()
-        success = 1
-        log.info(f'-----> SEND RESULT TO ARM GO. <RESPONSE>. NUM_ORDER: {appId}, response: {resp_json}')
+        save_doc_to_file(f'{appId}.pdf', resp_text)
+        del resp_text
+        status = 1
+        log.info(f'-----> SEND REQUEST. <  SEND  >. appId: {appId}, lang: {lang}, url: {url}')
     except requests.exceptions.Timeout as errT:
-        log.error(f'TIMEOUT ERROR. SEND RESULT TO ARM GO. num_order: {appId} : {errT}')
+        log.error(f'ERROR TIMEOUT. SEND RESULT TO ARM GO. num_order: {appId} : {errT}')
     except requests.exceptions.TooManyRedirects as errM:
         log.error(f'ERROR MANY REDIRECT. SEND RESULT TO ARM GO. num_order: {appId} : {errM}')
     except requests.exceptions.ConnectionError as errC:
-        log.error(f'ERROR CONNECTION. SEND RESULT TO ARM GO. num_order: {appId} : {errC}')
+        log.error(f'ERROR Connection. SEND RESULT TO ARM GO. num_order: {appId} : {errC}')
     except requests.exceptions.RequestException as errE:
-        log.error(f'REQUEST ERROR. SEND RESULT TO ARM GO. num_order: {appId} : {errE}')
+        log.error(f'ERROR Exception. SEND RESULT TO ARM GO. num_order: {appId} : {errE}')
+    except Exception as ex:
+        log.error(f'ERROR Exception. SEND RESULT TO ARM GO. num_order: {appId} : {ex}')
     finally:
         return success
 
@@ -57,9 +69,9 @@ def get_request():
         appId = request.args.get('appId')
         log.info(f"+++++ GET: appId: '{appId}', lang: {lang}")
         if appId:
-            status = get_pdf(appId, lang)
+            status, text = get_pdf(appId, lang)
+            print(f"-----------> status: {status}, text: {text}")
             if status:
-                log.error(f"GET REQUEST. appId: {appId}, status: {status}")
                 cut_pdf(f"{appId}.pdf", f"{appId}-2.pdf")
             else:
                 log.error(f"ERROR REQUEST: {appId}")
@@ -81,4 +93,5 @@ def root_request():
 
 if __name__ == "__main__":
     log.info(f"===> Main Receipt started on {cfg.host}:{cfg.port}, work_dir: {cfg.BASE}")
+    # get_pdf('002224748721', 'ru')
     app.run(host=cfg.host, port=cfg.port, debug=False)
