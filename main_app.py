@@ -46,8 +46,8 @@ def cut_pdf(ifile: str, ofile: str):
         newpage.add(page, viewrect=(0, 0, 0.5, 1))
         writer.addpages([newpage.render()])
     writer.write(ofile)
-    print(f"===> CUT PDF EXECUTED")
-    writer.close()
+    log.info(f"===> CUT PDF for {ifile} EXECUTED")
+    del writer
 
 
 # https://notes.gov4c.kz/ipsc/receipt.sv?lang=ru&appId=002224748721
@@ -65,6 +65,7 @@ def get_request():
     finally:
         if status:
             cut_pdf(f"{cfg.SPOOL}/{appId}.pdf", f"{cfg.SPOOL}/{appId}-2.pdf")
+            log.info(f"Передаем расписку №{appId}")
             return send_from_directory(f"{cfg.SPOOL}", f"{appId}-2.pdf")
         else:
             return f"<html><h1>Запрошенная расписка №'{appId} не найдена'</h1></html>"
