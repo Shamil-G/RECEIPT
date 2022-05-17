@@ -4,9 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-User=pdd
+User=cut_pdf
+Group=nginx
 WorkingDirectory=/home/cut_pdf/RECEIPT
-ExecStart=/home/cut_pdf/RECEIPT/venv/bin/uwsgi --ini wsgi.ini
+ExecStart=/home/cut_pdf/RECEIPT/venv/bin/gunicorn
 
 [Install]
 WantedBy=multi-user.target

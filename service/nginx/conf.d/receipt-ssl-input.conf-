@@ -1,0 +1,42 @@
+server {
+  listen 443 ssl;
+
+  server_name receipt;
+  ssl_certificate	"/etc/nginx/ssl/2A.gov4c.kz_custom_1.crtca";
+  ssl_certificate_key	"/etc/nginx/ssl/2A.gov4c.kz_custom_1.key";
+  
+  ssl_ciphers EECDH:+AES256:-3DES:RSA+AES:!NULL:!RC4;
+  ssl_prefer_server_ciphers on;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+  proxy_ssl_verify off;
+	    
+  add_header Access-Control-Allow-Origin *;
+
+  gzip on;
+  gzip_vary on;
+  gzip_proxied any;
+  gzip_buffers 16 8k;
+  gzip_comp_level 6;
+  gzip_http_version 1.1;
+  gzip_min_length 512;
+  gzip_types text/plain text/xml text/javascript text/css font/ttf
+             application/xml application/json application/manifest+json application/javascript
+             application/rdf+xml application/rss+xml;
+
+  access_log /var/log/nginx/nginx-receipt-access.log;
+  error_log /var/log/nginx/nginx-receipt-error.log;
+
+  client_max_body_size 20M;
+  sendfile on;
+  keepalive_timeout 0;
+
+  location /
+  {
+        proxy_pass https://armconeeo.iiscon.kz:443;
+#        proxy_pass https://10.61.43.150:443;
+        autoindex on;
+        autoindex_exact_size off;
+        proxy_read_timeout 300s;
+  }
+}
+

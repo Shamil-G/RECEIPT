@@ -1,0 +1,14 @@
+#openssl s_client -connect receipt.gov4c.kz:443
+
+#curl https://receipt.gov4c.kz/ipsc/receipt.sv?lang=ru&appId=002224748721
+#curl https://receipt.gov4c.kz/devipsc/receipt.sv?lang=ru&appId=002000011936
+#curl http://test.iiscon.kz/devipsc/receipt.sv?lang=ru&appId=002000011936
+#lynx http://test.iiscon.kz/devipsc/receipt.sv?lang=ru&appId=002000011936
+#wget http://test.iiscon.kz/devipsc/receipt.sv?lang=ru&appId=002000011936
+#wget --no-check-certificate https://armconeeo.iiscon.kz/devipsc/receipt.sv?lang=ru&appId=002000011936
+#wget http://receipt.gov4c.kz/devipsc/receipt.sv?lang=ru&appId=002000011936
+#wget http://receipt.gov4c.kz
+#wget --no-check-certificate http://receipt.gov4c.kz:5001/ipsc/receipt.sv?lang=ru&appId=002224748721
+#wget --no-check-certificate https://armconeeo.iiscon.kz/ipsc/receipt.sv?lang=ru&appId=002224748721
+wget http://notes1.gov4c.kz:5001/ipsc/receipt.sv?lang=ru&appId=002224748721
+#wget http://notes1.gov4c.kz:5000/ipsc/receipt.sv?lang=ru&appId=002224748721
