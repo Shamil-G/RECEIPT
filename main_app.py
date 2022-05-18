@@ -59,12 +59,17 @@ def get_request():
         appId = request.args.get('appId')
         log.info(f"SERVICE REQUESTED: appId: '{appId}', lang: {lang}")
         if appId:
-            status = get_pdf(appId, lang)
+            if not os.path.exists(f'{cfg.SPOOL}/{appId}-2.pdf'):
+                status = get_pdf(appId, lang)
+            else:
+                status = 2
     except Exception as e:
         log.error(f"GET VALUES: {appId} : {lang}. error: {e}")
     finally:
-        if status:
-            cut_pdf(f"{cfg.SPOOL}/{appId}.pdf", f"{cfg.SPOOL}/{appId}-2.pdf")
+        if status > 0:
+            if status == 1:
+                cut_pdf(f"{cfg.SPOOL}/{appId}.pdf", f"{cfg.SPOOL}/{appId}-2.pdf")
+                os.remove(f"{cfg.SPOOL}/{appId}.pdf")
             log.info(f"Передаем расписку №{appId}")
             return send_from_directory(f"{cfg.SPOOL}", f"{appId}-2.pdf")
         else:
