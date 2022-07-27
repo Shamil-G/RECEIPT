@@ -21,7 +21,7 @@ else:
     host = 'localhost'
     port = 80
 
-service_host = 'notes1.gov4c.kz'
+service_host = 'notes.gov4c.kz'
 service_port = 5001
 LOG_FILE = f'{BASE}/pdd.log'
 SPOOL = f'{BASE}/spool'
