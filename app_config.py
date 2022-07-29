@@ -9,20 +9,24 @@ else:
     BASE = f'/home/cut_pdf/{app_name}'
 
 if using[0:7] != 'DEV_WIN':
-    host = 'notes1.gov4c.kz'
+    host = 'localhost'
+    port = 5000
     os = 'unix'
     debug_level = 2
-    FACE_CONTROL_ENABLE = True
-    port = 5000
+    service_host_002 = 'notes.gov4c.kz'
+    service_port_002 = 5001
+    service_host_004 = 'notes.gov4c.kz'
+    service_port_004 = 5002
 else:
-    os = '!unix'
-    debug_level = 4
-    FACE_CONTROL_ENABLE = True
     host = 'localhost'
     port = 80
+    os = '!unix'
+    debug_level = 4
+    service_host_002 = 'notes.gov4c.kz'
+    service_port_002 = 5001
+    service_host_004 = 'notes.gov4c.kz'
+    service_port_004 = 5002
 
-service_host = 'notes.gov4c.kz'
-service_port = 5001
 LOG_FILE = f'{BASE}/pdd.log'
 SPOOL = f'{BASE}/spool'
 debug = True
